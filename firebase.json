@@ -1,0 +1,7 @@
+{
+  "hosting": {
+    "site": "century-art-2025",
+
+    "public": "build/web"
+  }
+}
