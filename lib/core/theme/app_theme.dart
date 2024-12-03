@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const Color kBlack = Color(0xFF000000);
 const Color k101010 = Color(0xff101010);
 const Color kPrimary = Color(0xfff45000);
+Color kPrimaryHover = kPrimary.withOpacity(0.3);
 const Color kWhite = Colors.white;
 
 const String tiny5 = 'Tiny5';
