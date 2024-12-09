@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppLogo extends StatelessWidget {
-  const AppLogo({super.key});
+  const AppLogo({super.key, this.style});
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       'CenturyArt',
-      style: Theme.of(context).textTheme.displayLarge,
+      style: style ?? Theme.of(context).textTheme.displayLarge,
     );
   }
 }

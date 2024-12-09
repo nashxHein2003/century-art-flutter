@@ -12,13 +12,20 @@ final ThemeData appTheme = ThemeData(
   scaffoldBackgroundColor: k101010,
   textTheme: const TextTheme(
     displayLarge: TextStyle(
-      fontSize: 36,
+      fontSize: 40,
       fontFamily: tiny5,
       color: kPrimary,
     ),
+    headlineLarge:
+        TextStyle(fontSize: 36, color: kBlack, fontWeight: FontWeight.w700),
+    headlineSmall:
+        TextStyle(fontSize: 14, color: kBlack, fontWeight: FontWeight.w700),
+    titleLarge: TextStyle(fontSize: 24, color: kBlack),
+    titleMedium: TextStyle(fontSize: 16, color: kBlack),
+    titleSmall: TextStyle(fontSize: 14, color: kBlack),
     bodyLarge: TextStyle(fontSize: 24, color: kWhite),
-    bodyMedium: TextStyle(fontSize: 16, color: kWhite),
-    bodySmall: TextStyle(fontSize: 11, color: kWhite),
+    bodyMedium: TextStyle(fontSize: 14, color: kWhite),
+    bodySmall: TextStyle(fontSize: 12, color: kWhite),
   ),
   iconTheme: const IconThemeData(
     size: 25,

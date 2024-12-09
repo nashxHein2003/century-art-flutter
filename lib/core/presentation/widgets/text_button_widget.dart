@@ -1,5 +1,5 @@
 import 'package:century_art_flutter/core/constants/size.dart';
-import 'package:century_art_flutter/core/theme/app_theme.dart';
+import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class TextButtonWidget extends StatefulWidget {
@@ -61,13 +61,19 @@ class TextButtonWidgetState extends State<TextButtonWidget> {
               ),
           child: Center(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  widget.iconName,
-                  color: _isHovered ? widget.iconHoverColor : widget.iconColor,
-                ),
+                widget.iconName != null
+                    ? Icon(
+                        widget.iconName,
+                        color: _isHovered
+                            ? widget.iconHoverColor
+                            : widget.iconColor,
+                      )
+                    : const SizedBox(),
                 Text(
                   widget.name,
+                  textAlign: TextAlign.center,
                   style: widget.textStyle?.copyWith(
                         color: _isHovered
                             ? widget.hoverTextColor

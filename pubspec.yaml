@@ -23,7 +23,11 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter:
+  assets:
+    - assets/images/feature/
+
   uses-material-design: true
+
   fonts:
     - family: Tiny5
       fonts:
