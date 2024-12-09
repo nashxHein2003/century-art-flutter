@@ -1,4 +1,4 @@
-import 'package:century_art_flutter/core/theme/app_theme.dart';
+import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:century_art_flutter/route/app_route.dart';
 import 'package:responsive_framework/responsive_framework.dart';
