@@ -14,3 +14,6 @@ const String register = 'Register ';
 
 const String enterYourPassword = 'Enter Your Password';
 const String enterYourEmail = 'Enter Your Email';
+
+const String signUpWithGoogle = '  Sign Up With Google Account';
+const String signInWithGoogle = '  Sign In With Google Account';

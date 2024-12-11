@@ -1,8 +1,10 @@
+import 'package:century_art_flutter/core/constants/image_constant.dart';
 import 'package:century_art_flutter/core/constants/size.dart';
 import 'package:century_art_flutter/core/constants/strings.dart';
 import 'package:century_art_flutter/core/extensions/context_extensions.dart';
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
 import 'package:century_art_flutter/core/presentation/widgets/k_text_button_widget.dart';
+import 'package:century_art_flutter/core/presentation/widgets/via_sign_widget.dart';
 import 'package:century_art_flutter/features/home/presentation/widgets/widgets.dart';
 import 'package:century_art_flutter/features/login/presentation/widgets/form_text_field_set_widget.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +26,7 @@ class RegisterScreen extends StatelessWidget {
           child: Center(
             child: Container(
                 width: 800,
-                height: 650,
+                height: 700,
                 padding: kV40,
                 child: Row(
                   children: [_buildImage(), _buildForm(context)],
@@ -43,12 +45,12 @@ class RegisterScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Align(
+          Align(
             alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.close_rounded,
+            child: IconButton(
+              onPressed: () => context.go('/'),
+              icon: const Icon(Icons.close_rounded, size: 30),
               color: kBlack,
-              size: 30,
             ),
           ),
           const Gap(40),
@@ -110,6 +112,11 @@ class RegisterScreen extends StatelessWidget {
                   ],
                 ),
                 const Gap(20),
+                const ViaSignWidget(
+                  name: signUpWithGoogle,
+                  image: googleIcon,
+                ),
+                const Gap(20),
                 Text(
                   registerPolicy,
                   style: Theme.of(context)
@@ -130,6 +137,7 @@ class RegisterScreen extends StatelessWidget {
         child: Image.asset(
       'assets/images/feature/yelan.jpg',
       width: double.infinity,
+      height: double.infinity,
       fit: BoxFit.cover,
     ));
   }

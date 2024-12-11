@@ -32,7 +32,10 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: kBlack,
       toolbarHeight: 70,
       actions: [
-        const TextButtonWidget(name: 'Join'),
+        TextButtonWidget(
+          name: 'Join',
+          onTap: () => context.go('/register'),
+        ),
         TextButtonWidget(
           name: 'Login',
           onTap: () => context.go('/login'),
