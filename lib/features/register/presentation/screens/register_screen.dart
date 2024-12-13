@@ -8,10 +8,12 @@ import 'package:century_art_flutter/core/presentation/widgets/k_text_button_widg
 import 'package:century_art_flutter/core/presentation/widgets/via_sign_widget.dart';
 import 'package:century_art_flutter/features/home/presentation/widgets/widgets.dart';
 import 'package:century_art_flutter/features/login/presentation/widgets/form_text_field_set_widget.dart';
+import 'package:century_art_flutter/features/register/presentation/provider/register_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -50,6 +52,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Expanded _buildForm(BuildContext context) {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    final registerProvider =
+        Provider.of<RegisterProvider>(context, listen: false);
+
     Future<void> _register(final String email, final String password) async {
       try {
         await _firebaseAuth.createUserWithEmailAndPassword(
@@ -58,6 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Future.delayed(const Duration(seconds: 3), () {
           context.go('/');
         });
+        registerProvider.insertUserInfo();
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           AuthException(message: 'The password provided is too weak.');

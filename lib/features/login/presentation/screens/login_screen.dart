@@ -50,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Expanded _buildForm(BuildContext context) {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
     Future<void> _login(final String email, final String password) async {
       try {
         await _firebaseAuth.signInWithEmailAndPassword(

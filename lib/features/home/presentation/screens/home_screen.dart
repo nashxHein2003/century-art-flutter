@@ -1,12 +1,27 @@
 import 'package:century_art_flutter/core/constants/size.dart';
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
 import 'package:century_art_flutter/features/home/presentation/widgets/widgets.dart';
+import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+
+    homeProvider.getUserInfo();
+  }
 
   @override
   Widget build(BuildContext context) {

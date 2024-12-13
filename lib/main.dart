@@ -1,14 +1,35 @@
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
+import 'package:century_art_flutter/core/util/locator.dart';
+import 'package:century_art_flutter/core/util/shared/shared_preference_provider.dart';
+import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
+import 'package:century_art_flutter/features/register/presentation/provider/register_provider.dart';
 import 'package:century_art_flutter/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:century_art_flutter/route/app_route.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  await setup();
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<HomeProvider>(create: (_) => HomeProvider()),
+      ChangeNotifierProvider<SharedPreferenceProvider>(
+        create: (_) => SharedPreferenceProvider(prefs),
+      ),
+      ChangeNotifierProvider<RegisterProvider>(
+        create: (_) => RegisterProvider(),
+      )
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
