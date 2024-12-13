@@ -1,20 +1,30 @@
 import 'package:century_art_flutter/core/constants/image_constant.dart';
 import 'package:century_art_flutter/core/constants/size.dart';
 import 'package:century_art_flutter/core/constants/strings.dart';
+import 'package:century_art_flutter/core/data/failure/auth_exception.dart';
 import 'package:century_art_flutter/core/presentation/widgets/k_text_button_widget.dart';
-import 'package:century_art_flutter/core/presentation/widgets/text_button_widget.dart';
 import 'package:century_art_flutter/core/presentation/widgets/app_logo.dart';
 import 'package:century_art_flutter/core/presentation/widgets/via_sign_widget.dart';
 import 'package:century_art_flutter/features/login/presentation/widgets/form_text_field_set_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:century_art_flutter/core/extensions/context_extensions.dart';
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gap/gap.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController =
+      TextEditingController(text: '');
+  final TextEditingController _passwordController =
+      TextEditingController(text: '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +49,24 @@ class LoginScreen extends StatelessWidget {
   }
 
   Expanded _buildForm(BuildContext context) {
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    Future<void> _login(final String email, final String password) async {
+      try {
+        await _firebaseAuth.signInWithEmailAndPassword(
+            email: email, password: password);
+
+        Future.delayed(const Duration(seconds: 3), () {
+          context.go('/');
+        });
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          AuthException(message: 'The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          AuthException(message: 'An account already exists with that email.');
+        }
+      }
+    }
+
     return Expanded(
         child: Container(
       color: kWhite,
@@ -75,22 +103,24 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
                 const Gap(30),
-                const FormTextFieldSetWidget(
+                FormTextFieldSetWidget(
                   label: enterYourEmail,
+                  controller: _emailController,
                 ),
                 const Gap(10),
-                const FormTextFieldSetWidget(
+                FormTextFieldSetWidget(
                   label: enterYourPassword,
                   obsecureText: true,
+                  controller: _passwordController,
                 ),
                 const Gap(20),
-                TextButtonWidget(
+                KTextButtonWidget(
                   name: loginCap,
                   height: 48,
-                  textStyle: Theme.of(context).textTheme.bodyMedium,
                   bgColor: kPrimary,
-                  hoverTextColor: kWhite,
-                  hoverBgColor: kPrimary,
+                  onTap: () {
+                    _login(_emailController.text, _passwordController.text);
+                  },
                 ),
                 const Gap(20),
                 Row(
