@@ -15,6 +15,13 @@ dependencies:
   go_router: ^14.6.1
   responsive_framework: ^1.5.1
   gap: ^3.0.1
+  firebase_core: ^3.8.1
+  firebase_auth: ^5.3.4
+  provider: ^6.1.2
+  shared_preferences: ^2.3.3
+  get_it: ^8.0.2
+  logger: ^2.5.0
+  cloud_firestore: ^5.5.1
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +32,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/feature/
+    - assets/images/icons/
 
   uses-material-design: true
 

@@ -1,7 +1,1 @@
-{
-  "hosting": {
-    "site": "century-art-2025",
-
-    "public": "build/web"
-  }
-}
+{"hosting":{"site":"century-art-2025","public":"build/web"},"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"century-art-2025","configurations":{"web":"1:515554385801:web:29c3cccfc22d751ab78b58","windows":"1:515554385801:web:29c3cccfc22d751ab78b58"}}}}}}
