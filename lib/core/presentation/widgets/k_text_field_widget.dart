@@ -51,7 +51,9 @@ class KTextFieldWidget extends StatelessWidget {
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: kBlack),
                 borderRadius: BorderRadius.all(Radius.zero),
-              )),
+              ),
+              filled: true,
+              fillColor: kWhite),
         ));
   }
 }

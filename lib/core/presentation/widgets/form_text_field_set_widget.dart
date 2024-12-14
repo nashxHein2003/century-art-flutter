@@ -5,6 +5,7 @@ class FormTextFieldSetWidget extends StatefulWidget {
   const FormTextFieldSetWidget(
       {super.key,
       required this.label,
+      this.style,
       this.width,
       this.height,
       this.controller,
@@ -13,6 +14,7 @@ class FormTextFieldSetWidget extends StatefulWidget {
       this.onChanged,
       this.onSubmitted});
   final String label;
+  final TextStyle? style;
   final double? width;
   final double? height;
   final TextEditingController? controller;
@@ -33,10 +35,11 @@ class _FormTextFieldSetWidgetState extends State<FormTextFieldSetWidget> {
       children: [
         Text(
           widget.label,
-          style: Theme.of(context)
-              .textTheme
-              .titleSmall
-              ?.copyWith(fontWeight: FontWeight.w700),
+          style: widget.style ??
+              Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(fontWeight: FontWeight.w700),
         ),
         KTextFieldWidget(
           width: widget.width,

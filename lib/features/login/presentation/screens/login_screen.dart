@@ -6,7 +6,7 @@ import 'package:century_art_flutter/core/presentation/widgets/k_text_button_widg
 import 'package:century_art_flutter/core/presentation/widgets/app_logo.dart';
 import 'package:century_art_flutter/core/presentation/widgets/via_sign_widget.dart';
 import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
-import 'package:century_art_flutter/features/login/presentation/widgets/form_text_field_set_widget.dart';
+import 'package:century_art_flutter/core/presentation/widgets/form_text_field_set_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:century_art_flutter/core/extensions/context_extensions.dart';

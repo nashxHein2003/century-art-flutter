@@ -6,6 +6,7 @@ import 'package:century_art_flutter/core/presentation/widgets/k_side_bar_widget.
 import 'package:century_art_flutter/core/presentation/widgets/widgets.dart';
 import 'package:century_art_flutter/core/util/shared/shared_preference_provider.dart';
 import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
+import 'package:century_art_flutter/features/upload/presentation/widgets/submission_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -108,9 +109,30 @@ class _HomeScreenState extends State<HomeScreen> {
           bgColor: kPrimary,
           hoverBgColor: kPrimaryHover,
           hoverTextColor: kWhite,
+          onTap: () => showPopup(),
         ),
         const Gap(10),
       ],
     );
+  }
+
+  void showPopup() {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return Center(
+            child: Container(
+              width: context.screenSize.width * 0.8,
+              height: context.screenSize.height * 0.9,
+              padding: kP14,
+              color: k1a1a1a,
+              child: const Material(
+                color: Colors.transparent,
+                child: SubmissionWidget(),
+              ),
+            ),
+          );
+        });
   }
 }
