@@ -12,14 +12,19 @@ class SharedPreferenceProvider extends ChangeNotifier {
         name: prefs.getString('name') ?? '',
         email: prefs.getString('email') ?? '',
         avatar: prefs.getString('avatar') ?? '',
+        knownAs: prefs.getString('known_as') ?? '',
       );
+
+  bool get isAuthenticated => prefs.getBool('isAuthenticated') ?? false;
 
   Future<void> setUserInformation(UserInformationDTO userInformationDTO) async {
     final preferences = prefs;
-    await preferences.setString('id', userInformationDTO.id ?? '');
+    await preferences.setString('id', userInformationDTO.id);
     await preferences.setString('email', userInformationDTO.email ?? '');
     await preferences.setString('name', userInformationDTO.name ?? '');
     await preferences.setString('avatar', userInformationDTO.avatar ?? '');
+    await preferences.setString('known_as', userInformationDTO.knownAs ?? '');
+    print(userInformationDTO);
     notifyListeners();
   }
 
@@ -28,6 +33,11 @@ class SharedPreferenceProvider extends ChangeNotifier {
     prefs.remove('name');
     prefs.remove('email');
     prefs.remove('avatar');
+    prefs.remove('known_as');
     notifyListeners();
+  }
+
+  void authenticated() {
+    prefs.setBool('isAuthenticated', true);
   }
 }

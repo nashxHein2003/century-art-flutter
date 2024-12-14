@@ -1,5 +1,6 @@
 import 'package:century_art_flutter/core/constants/size.dart';
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
+import 'package:century_art_flutter/core/util/shared/shared_preference_provider.dart';
 import 'package:century_art_flutter/features/home/presentation/widgets/widgets.dart';
 import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
 import 'package:go_router/go_router.dart';
@@ -18,9 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
-
-    homeProvider.getUserInfo();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+      homeProvider.getUser();
+    });
   }
 
   @override
@@ -47,14 +49,33 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: kBlack,
       toolbarHeight: 70,
       actions: [
-        TextButtonWidget(
-          name: 'Join',
-          onTap: () => context.go('/register'),
-        ),
-        TextButtonWidget(
-          name: 'Login',
-          onTap: () => context.go('/login'),
-        ),
+        Consumer<SharedPreferenceProvider>(
+            builder: (BuildContext context, provider, Widget? child) {
+          return provider.isAuthenticated
+              ? const SizedBox()
+              : TextButtonWidget(
+                  name: 'Join',
+                  onTap: () => context.go('/register'),
+                );
+        }),
+        Consumer<SharedPreferenceProvider>(
+            builder: (BuildContext context, provider, Widget? child) {
+          return provider.isAuthenticated
+              ? const SizedBox()
+              : TextButtonWidget(
+                  name: 'Login',
+                  onTap: () => context.go('/login'),
+                );
+        }),
+        // Consumer<SharedPreferenceProvider>(
+        //     builder: (BuildContext context, provider, Widget? child) {
+        //   return provider.isAuthenticated
+        //       ? const SizedBox()
+        //       : TextButtonWidget(
+        //           name: 'Login',
+        //           onTap: () => context.go('/login'),
+        //         );
+        // }),
         const Gap(10),
         TextButtonWidget(
           name: 'Submit',

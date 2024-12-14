@@ -5,6 +5,7 @@ import 'package:century_art_flutter/core/data/failure/auth_exception.dart';
 import 'package:century_art_flutter/core/presentation/widgets/k_text_button_widget.dart';
 import 'package:century_art_flutter/core/presentation/widgets/app_logo.dart';
 import 'package:century_art_flutter/core/presentation/widgets/via_sign_widget.dart';
+import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
 import 'package:century_art_flutter/features/login/presentation/widgets/form_text_field_set_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:century_art_flutter/core/extensions/context_extensions.dart';
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
       TextEditingController(text: '');
   final TextEditingController _passwordController =
       TextEditingController(text: '');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Expanded _buildForm(BuildContext context) {
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
     Future<void> _login(final String email, final String password) async {
@@ -56,9 +61,12 @@ class _LoginScreenState extends State<LoginScreen> {
         await _firebaseAuth.signInWithEmailAndPassword(
             email: email, password: password);
 
-        Future.delayed(const Duration(seconds: 3), () {
-          context.go('/');
-        });
+        homeProvider.getUser();
+        if (mounted) {
+          setState(() {
+            context.go('/');
+          });
+        }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           AuthException(message: 'The password provided is too weak.');
