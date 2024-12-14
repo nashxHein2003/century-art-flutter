@@ -13,3 +13,4 @@ const EdgeInsets kV40 = EdgeInsets.symmetric(vertical: 40);
 const EdgeInsets kH12V10 = EdgeInsets.symmetric(horizontal: 12, vertical: 10);
 const EdgeInsets kH14V10 = EdgeInsets.symmetric(horizontal: 14, vertical: 10);
 const EdgeInsets kH20V20 = EdgeInsets.symmetric(horizontal: 20, vertical: 20);
+const EdgeInsets kH14V26 = EdgeInsets.symmetric(horizontal: 14, vertical: 26);

@@ -1,7 +1,7 @@
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class KTextFieldWidget extends StatefulWidget {
+class KTextFieldWidget extends StatelessWidget {
   const KTextFieldWidget(
       {super.key,
       this.width = 300,
@@ -20,26 +20,21 @@ class KTextFieldWidget extends StatefulWidget {
   final Function(String?)? onSubmitted;
 
   @override
-  State<KTextFieldWidget> createState() => _KTextFieldWidgetState();
-}
-
-class _KTextFieldWidgetState extends State<KTextFieldWidget> {
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: widget.width,
-        height: widget.height ?? 40,
+        width: width,
+        height: height ?? 40,
         child: TextFormField(
           textInputAction: TextInputAction.done,
           onTapOutside: (_) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
-          controller: widget.controller,
-          obscureText: widget.obsecureText,
+          controller: controller,
+          obscureText: obsecureText,
           cursorColor: kPrimary,
-          keyboardType: widget.keyboardType,
-          onChanged: widget.onChanged,
-          onFieldSubmitted: widget.onSubmitted,
+          keyboardType: keyboardType,
+          onChanged: onChanged,
+          onFieldSubmitted: onSubmitted,
           textAlign: TextAlign.start,
           textAlignVertical: TextAlignVertical.center,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
