@@ -1,7 +1,10 @@
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
 import 'package:century_art_flutter/core/util/locator.dart';
+import 'package:century_art_flutter/core/util/shared/app_state_provider.dart';
 import 'package:century_art_flutter/core/util/shared/shared_preference_provider.dart';
+import 'package:century_art_flutter/features/gallery/presentation/providers/gallery_provider.dart';
 import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
+import 'package:century_art_flutter/features/login/presentation/providers/login_provider.dart';
 import 'package:century_art_flutter/features/register/presentation/provider/register_provider.dart';
 import 'package:century_art_flutter/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,13 +23,17 @@ void main() async {
 
   runApp(MultiProvider(
     providers: [
+      ChangeNotifierProvider<AppStateProvider>(
+          create: (_) => AppStateProvider()),
       ChangeNotifierProvider<HomeProvider>(create: (_) => HomeProvider()),
       ChangeNotifierProvider<SharedPreferenceProvider>(
         create: (_) => SharedPreferenceProvider(prefs),
       ),
       ChangeNotifierProvider<RegisterProvider>(
         create: (_) => RegisterProvider(),
-      )
+      ),
+      ChangeNotifierProvider<GalleryProvider>(create: (_) => GalleryProvider()),
+      ChangeNotifierProvider<LoginProvider>(create: (_) => LoginProvider())
     ],
     child: const MyApp(),
   ));

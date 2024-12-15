@@ -25,6 +25,10 @@ class KTextFieldWidget extends StatelessWidget {
         width: width,
         height: height ?? 40,
         child: TextFormField(
+          textInputAction: TextInputAction.done,
+          onTapOutside: (_) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           controller: controller,
           obscureText: obsecureText,
           cursorColor: kPrimary,
@@ -47,7 +51,9 @@ class KTextFieldWidget extends StatelessWidget {
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: kBlack),
                 borderRadius: BorderRadius.all(Radius.zero),
-              )),
+              ),
+              filled: true,
+              fillColor: kWhite),
         ));
   }
 }
