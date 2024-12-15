@@ -38,6 +38,7 @@ class SharedPreferenceProvider extends ChangeNotifier {
   }
 
   void authenticated() {
+    print('Updated');
     prefs.setBool('isAuthenticated', true);
   }
 }

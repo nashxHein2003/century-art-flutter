@@ -1,10 +1,11 @@
 import 'package:century_art_flutter/core/constants/size.dart';
 import 'package:century_art_flutter/core/extensions/context_extensions.dart';
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
-import 'package:century_art_flutter/core/presentation/widgets/k_icon_button.dart';
 import 'package:century_art_flutter/core/presentation/widgets/k_side_bar_widget.dart';
 import 'package:century_art_flutter/core/presentation/widgets/widgets.dart';
 import 'package:century_art_flutter/core/util/shared/shared_preference_provider.dart';
+import 'package:century_art_flutter/features/gallery/presentation/providers/gallery_provider.dart';
+import 'package:century_art_flutter/features/gallery/presentation/screens/gallery_screen.dart';
 import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
 import 'package:century_art_flutter/features/upload/presentation/widgets/submission_widget.dart';
 import 'package:go_router/go_router.dart';
@@ -24,8 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final homeProvider = Provider.of<HomeProvider>(context, listen: false);
-      homeProvider.getUser();
+      Provider.of<HomeProvider>(context, listen: false);
+      final galleryProvider =
+          Provider.of<GalleryProvider>(context, listen: false);
+      //homeProvider.getUser();
+      galleryProvider.getArts();
     });
   }
 
@@ -48,7 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 80,
                   height: context.screenSize.height,
                 ),
-                const Expanded(child: SizedBox())
+                const Expanded(
+                    child: SizedBox(
+                        width: double.infinity,
+                        height: double.infinity,
+                        child: GalleryScreen()))
               ],
             ),
           ),
@@ -83,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }),
         Consumer<SharedPreferenceProvider>(
             builder: (BuildContext context, provider, Widget? child) {
+          print('Authenticated: ${provider.isAuthenticated}');
           return provider.isAuthenticated
               ? const SizedBox()
               : TextButtonWidget(

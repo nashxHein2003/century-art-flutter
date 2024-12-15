@@ -13,8 +13,13 @@ class HomeProvider extends ChangeNotifier {
 
   final sharedPreference = getIt<SharedPreferenceProvider>();
 
+  HomeProvider() {
+    getUser();
+  }
+
   void getUser() async {
     User? user = _auth.currentUser;
+    print('Call Function');
     if (user != null) {
       DocumentSnapshot snapshot = await FirebaseFirestore.instance
           .collection('users')
