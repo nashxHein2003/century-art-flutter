@@ -1,13 +1,7 @@
-import 'package:century_art_flutter/core/constants/image_constant.dart';
-import 'package:century_art_flutter/core/constants/size.dart';
-import 'package:century_art_flutter/core/constants/strings.dart';
-import 'package:century_art_flutter/core/data/failure/auth_exception.dart';
-import 'package:century_art_flutter/core/presentation/widgets/k_text_button_widget.dart';
-import 'package:century_art_flutter/core/presentation/widgets/app_logo.dart';
-import 'package:century_art_flutter/core/presentation/widgets/via_sign_widget.dart';
+import 'package:century_art_flutter/core/constants/constants.dart';
+import 'package:century_art_flutter/core/presentation/widgets/widgets.dart';
 import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
-import 'package:century_art_flutter/core/presentation/widgets/form_text_field_set_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:century_art_flutter/features/login/presentation/providers/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:century_art_flutter/core/extensions/context_extensions.dart';
 import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
@@ -53,25 +47,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Expanded _buildForm(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    final loginProvider = Provider.of<LoginProvider>(context, listen: false);
 
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
-    Future<void> _login(final String email, final String password) async {
-      try {
-        await _firebaseAuth.signInWithEmailAndPassword(
-            email: email, password: password);
-
+    void _login(String email, String password) async {
+      await loginProvider.loginWithEmailAndPassword(email, password);
+      if (loginProvider.appStatus != AppStatus.error) {
         homeProvider.getUser();
         if (mounted) {
           setState(() {
             context.go('/');
           });
-        }
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          AuthException(message: 'The password provided is too weak.');
-        } else if (e.code == 'email-already-in-use') {
-          AuthException(message: 'An account already exists with that email.');
         }
       }
     }
