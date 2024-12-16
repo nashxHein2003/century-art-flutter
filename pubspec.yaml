@@ -33,6 +33,7 @@ flutter:
   assets:
     - assets/images/feature/
     - assets/images/icons/
+    - assets/images/sample/
 
   uses-material-design: true
 
