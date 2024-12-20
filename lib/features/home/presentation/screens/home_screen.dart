@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               children: [
                 SizedBox(
-                  width: 80,
+                  width: 60,
                   height: context.screenSize.height,
                 ),
                 const Expanded(
