@@ -2,6 +2,7 @@ import 'package:century_art_flutter/core/presentation/theme/app_theme.dart';
 import 'package:century_art_flutter/core/util/locator.dart';
 import 'package:century_art_flutter/core/util/shared/app_state_provider.dart';
 import 'package:century_art_flutter/core/util/shared/shared_preference_provider.dart';
+import 'package:century_art_flutter/features/account/presentation/providers/account_provider.dart';
 import 'package:century_art_flutter/features/gallery/presentation/providers/gallery_provider.dart';
 import 'package:century_art_flutter/features/home/presentation/provider/home_provider.dart';
 import 'package:century_art_flutter/features/login/presentation/providers/login_provider.dart';
@@ -33,7 +34,8 @@ void main() async {
         create: (_) => RegisterProvider(),
       ),
       ChangeNotifierProvider<GalleryProvider>(create: (_) => GalleryProvider()),
-      ChangeNotifierProvider<LoginProvider>(create: (_) => LoginProvider())
+      ChangeNotifierProvider<LoginProvider>(create: (_) => LoginProvider()),
+      ChangeNotifierProvider<AccountProvider>(create: (_) => AccountProvider()),
     ],
     child: const MyApp(),
   ));
