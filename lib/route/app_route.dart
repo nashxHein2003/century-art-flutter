@@ -1,3 +1,4 @@
+import 'package:century_art_flutter/features/account/presentation/screens/account_screen.dart';
 import 'package:century_art_flutter/features/home/presentation/screens/home_screen.dart';
 import 'package:century_art_flutter/features/login/presentation/screens/login_screen.dart';
 import 'package:century_art_flutter/features/register/presentation/screens/register_screen.dart';
@@ -26,6 +27,11 @@ final router = GoRouter(
       path: '/upload',
       name: 'Upload',
       builder: (context, state) => const UploadScreen(),
+    ),
+    GoRoute(
+      path: '/account',
+      name: 'Account',
+      builder: (context, state) => const AccountScreen(),
     )
   ],
 );

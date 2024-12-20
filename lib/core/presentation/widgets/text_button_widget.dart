@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class TextButtonWidget extends StatefulWidget {
   final String name;
   final double? height;
+  final double? width;
   final EdgeInsets? padding;
   final Color? bgColor;
   final Color? hoverBgColor;
@@ -22,6 +23,7 @@ class TextButtonWidget extends StatefulWidget {
     super.key,
     required this.name,
     this.height,
+    this.width,
     this.padding = kH12,
     this.bgColor,
     this.hoverBgColor,
@@ -53,6 +55,7 @@ class TextButtonWidgetState extends State<TextButtonWidget> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           padding: widget.padding,
+          width: widget.width,
           height: widget.height,
           decoration: widget.decoration ??
               BoxDecoration(
